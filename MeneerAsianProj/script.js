@@ -25,7 +25,7 @@ function updateCart() {
     let total = 0;
 
     if (cart.length === 0) {
-        cartItems.innerHTML = '<li>Je winkelwagen is leeg.</li>';
+        cartItems.innerHTML = '<li>Je winkelwagentje is leeg.</li>';
     } else {
         cart.forEach((item, index) => {
             let li = document.createElement("li");
@@ -61,12 +61,15 @@ function closeCartModal() {
     cartModal.style.display = "none";
 }
 
-checkoutButton.onclick = function() {
-    if (cart.length === 0) {
-        alert("Je winkelwagen is leeg!");
-        return;
-    }
-    alert("Afrekenen is nog niet geïmplementeerd.");
-};
+if(checkoutButton) {
+    checkoutButton.onclick = function() {
+        if (cart.length === 0) {
+            alert("Je winkelwagentje is leeg! Voeg items toe voordat je afrekent.");
+            return;
+        }
+        alert("Afrekenen is nog niet geïmplementeerd. Dit is een voorbeeld.");
+
+    };
+}
 
 updateCart();
