@@ -6,11 +6,25 @@ let cartModal = document.getElementById("cart-modal");
 let closeBtn = document.querySelector(".close");
 let checkoutButton = document.getElementById("checkoutButton");
 
+// Update cart display on page load
+updateCart();
+
+// Add event listeners
 document.getElementById("cart-link").addEventListener("click", openCartModal);
 closeBtn.addEventListener("click", closeCartModal);
 
 function addToCart(productName, price) {
-    cart.push({ name: productName, price: price });
+    // Check if the product already exists in the cart
+    const existingProduct = cart.find(item => item.name === productName);
+    
+    if (existingProduct) {
+        // If it exists, increment the quantity
+        existingProduct.quantity += 1;
+    } else {
+        // Otherwise, add it to the cart with quantity 1
+        cart.push({ name: productName, price: price, quantity: 1 });
+    }
+
     updateLocalStorage();
     updateCart();
 }
@@ -29,7 +43,7 @@ function updateCart() {
     } else {
         cart.forEach((item, index) => {
             let li = document.createElement("li");
-            li.textContent = item.name + " - €" + item.price.toFixed(2);
+            li.textContent = `${item.name} - €${item.price.toFixed(2)} x ${item.quantity}`;
 
             let deleteButton = document.createElement("button");
             deleteButton.textContent = "Verwijder";
@@ -39,7 +53,7 @@ function updateCart() {
 
             li.appendChild(deleteButton);
             cartItems.appendChild(li);
-            total += item.price;
+            total += item.price * item.quantity; // Calculate total price
         });
     }
 
@@ -47,7 +61,7 @@ function updateCart() {
 }
 
 function removeFromCart(index) {
-    cart.splice(index, 1);
+    cart.splice(index, 1); // Remove item from cart
     updateLocalStorage();
     updateCart();
 }
@@ -61,15 +75,14 @@ function closeCartModal() {
     cartModal.style.display = "none";
 }
 
-if(checkoutButton) {
+// Checkout functionality
+if (checkoutButton) {
     checkoutButton.onclick = function() {
         if (cart.length === 0) {
             alert("Je winkelwagentje is leeg! Voeg items toe voordat je afrekent.");
             return;
         }
         alert("Afrekenen is nog niet geïmplementeerd. Dit is een voorbeeld.");
-
+        // Here you could redirect to a checkout page or process payment
     };
 }
-
-updateCart();
