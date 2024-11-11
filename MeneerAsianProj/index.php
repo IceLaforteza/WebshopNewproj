@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,20 +19,16 @@
 
 <section class="products">
     <?php
-    // Include the database connection
-    include 'db.php';
-
-    // Prepare and execute the SQL query to get products
+    include 'db.php'; // Include the database connection
     $stmt = $conn->prepare("SELECT * FROM products");
     $stmt->execute();
     $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Loop through each product and display it
     foreach ($products as $product) {
         echo '<div class="product">';
-        echo '<h2>' . htmlspecialchars($product['name']) . '</h2>'; // Display product name
-        echo '<p>Prijs: €' . number_format($product['price'], 2) . '</p>'; // Display product price
-        echo '<button onclick="addToCart(\'' . addslashes($product['name']) . '\', ' . $product['price'] . ')">Voeg toe aan winkelwagentje</button>'; // Button to add to cart
+        echo '<h2>' . htmlspecialchars($product['name']) . '</h2>';
+        echo '<p>Prijs: €' . number_format($product['price'], 2) . '</p>';
+        echo '<button onclick="addToCart(\'' . addslashes($product['name']) . '\', ' . $product['price'] . ')">Voeg toe aan winkelwagentje</button>';
         echo '</div>';
     }
     ?>

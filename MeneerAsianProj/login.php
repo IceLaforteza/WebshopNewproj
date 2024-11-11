@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <title>Inloggen</title>
@@ -22,12 +23,9 @@
     </form>
 </section>
 
-</body>
-</html>
-
 <?php
 session_start();
-include 'db.php';
+include 'includes/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
@@ -36,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Check credentials (this is a simple example, use hashed passwords in production)
     if ($username === 'admin' && $password === 'password') {
         $_SESSION['loggedin'] = true;
-        header("Location: admin/manage_products.php");
+        header("Location: admin/beheer_producten.php");
         exit();
     } else {
         $error = "Ongeldige gebruikersnaam of wachtwoord.";
@@ -44,5 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<!-- Add this to your login form -->
+<!-- Display error message if exists -->
 <?php if (isset($error)) echo "<p>$error</p>"; ?>
+
+</body>
+</html>

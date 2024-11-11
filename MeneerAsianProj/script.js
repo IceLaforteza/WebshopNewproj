@@ -4,9 +4,8 @@ let cartItems = document.getElementById("cart-items");
 let totalPrice = document.getElementById("total-price");
 let cartModal = document.getElementById("cart-modal");
 let closeBtn = document.querySelector(".close");
-let checkoutButton = document.getElementById("checkoutButton");
 
-// Update cart display on page load
+// Update the cart display on page load
 updateCart();
 
 // Add event listeners
@@ -34,9 +33,9 @@ function updateLocalStorage() {
 }
 
 function updateCart() {
-    cartCount.textContent = cart.length;
-    cartItems.innerHTML = '';
-    let total = 0;
+    cartCount.textContent = cart.length; // Update the cart count display
+    cartItems.innerHTML = ''; // Clear the cart items display
+    let total = 0; // Initialize total price
 
     if (cart.length === 0) {
         cartItems.innerHTML = '<li>Je winkelwagentje is leeg.</li>';
@@ -57,32 +56,30 @@ function updateCart() {
         });
     }
 
-    totalPrice.textContent = total.toFixed(2);
+    totalPrice.textContent = total.toFixed(2); // Update the total price display
 }
 
 function removeFromCart(index) {
     cart.splice(index, 1); // Remove item from cart
-    updateLocalStorage();
-    updateCart();
+    updateLocalStorage(); // Update localStorage
+    updateCart(); // Refresh the cart display
 }
 
 function openCartModal() {
-    cartModal.style.display = "block";
-    updateCart();
+    cartModal.style.display = "block"; // Show the cart modal
+    updateCart(); // Refresh the cart display
 }
 
 function closeCartModal() {
-    cartModal.style.display = "none";
+    cartModal.style.display = "none"; // Hide the cart modal
 }
 
 // Checkout functionality
-if (checkoutButton) {
-    checkoutButton.onclick = function() {
-        if (cart.length === 0) {
-            alert("Je winkelwagentje is leeg! Voeg items toe voordat je afrekent.");
-            return;
-        }
-        alert("Afrekenen is nog niet geïmplementeerd. Dit is een voorbeeld.");
-        // Here you could redirect to a checkout page or process payment
-    };
-}
+document.getElementById("checkoutButton").onclick = function() {
+    if (cart.length === 0) {
+        alert("Je winkelwagentje is leeg! Voeg items toe voordat je afrekent.");
+        return;
+    }
+    alert("Afrekenen is nog niet geïmplementeerd. Dit is een voorbeeld.");
+    // Here you could redirect to a checkout page or process payment
+};

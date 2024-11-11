@@ -69,8 +69,8 @@
             return;
         }
         alert("Afrekenen is nog niet geïmplementeerd. Dit is een voorbeeld.");
-        // You could redirect to a checkout page or process payment here
     };
 </script>
 
 </body>
+</html>

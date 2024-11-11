@@ -1,5 +1,5 @@
 <?php
-include 'db.php';
+include '../includes/db.php';
 
 // Handle product deletion
 if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id'])) {
@@ -7,7 +7,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id']))
     $stmt = $conn->prepare("DELETE FROM products WHERE id = :id");
     $stmt->bindParam(':id', $productId);
     $stmt->execute();
-    header("Location: Admin/beheer_producten.php?message=Product%20verwijderd");
+    header("Location: beheer_producten.php?message=Product%20verwijderd");
     exit();
 }
 
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_product'])) {
     $stmt->bindParam(':name', $name);
     $stmt->bindParam(':price', $price);
     $stmt->execute();
-    header("Location: Admin/beheer_producten.php?message=Product%20toegevoegd");
+    header("Location: beheer_producten.php?message=Product%20toegevoegd");
     exit();
 }
 
@@ -48,40 +48,3 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <section class="product-management">
     <h2>Producten</h2>
-    <?php if (isset($_GET['message'])): ?>
-        <p><?php echo htmlspecialchars($_GET['message']); ?></p>
-    <?php endif; ?>
-    
-    <table>
-        <thead>
-            <tr>
-                <th>Naam</th>
-                <th>Prijs</th>
-                <th>Acties</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($products as $product): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($product['name']); ?></td>
-                    <td>€<?php echo number_format($product['price'], 2); ?></td>
-                    <td>
-                        <a href="Admin/beheer_producten.php?action=delete&id=<?php echo $product['id']; ?>">Verwijder</a>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-
-    <h2>Voeg een nieuw product toe</h2>
-    <form method="POST" action="Admin/beheer_producten.php">
-        <label for="name">Productnaam:</label>
-        <input type="text" name="name" required>
-        <label for="price">Prijs:</label>
-        <input type="number" name="price" step="0.01" required>
-        <button type="submit" name="add_product">Voeg toe</button>
-    </form>
-</section>
-
-</body>
-</html>
