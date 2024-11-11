@@ -1,5 +1,5 @@
 <?php
-include 'db.php';
+include 'Include/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Handle form submission for adding/updating products

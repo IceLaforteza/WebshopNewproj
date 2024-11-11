@@ -19,7 +19,7 @@
 
 <section class="products">
     <?php
-    include 'db.php'; // Include the database connection
+    include 'Include/db.php'; // Include the database connection
     $stmt = $conn->prepare("SELECT * FROM products");
     $stmt->execute();
     $products = $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -1,5 +1,5 @@
 <?php
-include 'db.php';
+include 'Include/db.php';
 
 if (isset($_GET['id'])) {
     $productId = intval($_GET['id']);
