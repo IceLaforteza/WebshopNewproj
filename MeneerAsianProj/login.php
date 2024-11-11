@@ -25,3 +25,25 @@
 
 </body>
 </html>
+
+<?php
+session_start();
+include 'includes/db.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    // Check credentials (this is a simple example, use hashed passwords in production)
+    if ($username === 'admin' && $password === 'password') {
+        $_SESSION['loggedin'] = true;
+        header("Location: admin/manage_products.php");
+        exit();
+    } else {
+        $error = "Ongeldige gebruikersnaam of wachtwoord.";
+    }
+}
+?>
+
+<!-- Add this to your login form -->
+<?php if (isset($error)) echo "<p>$error</p>"; ?>

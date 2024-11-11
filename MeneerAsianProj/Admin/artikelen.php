@@ -78,6 +78,6 @@ function deleteProduct(id) {
     }
 }
 </script>
-
+<a href="delete_product.php?id=<?php echo $product['id']; ?>">Verwijder</a>
 </body>
 </html>

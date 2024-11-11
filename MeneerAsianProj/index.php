@@ -8,6 +8,9 @@
 </head>
 <body>
 
+<!-- <button onclick="addToCart('<?php echo addslashes($product['name']); ?>', 
+<?php echo $product['price']; ?>)">Voeg toe aan winkelwagentje</button> -->
+
 <header>
     <h1>Sportwinkel</h1>
     <nav>
