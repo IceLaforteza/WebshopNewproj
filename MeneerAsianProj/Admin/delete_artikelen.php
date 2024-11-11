@@ -1,5 +1,5 @@
 <?php
-include '../includes/db.php';
+include 'db.php';
 
 if (isset($_GET['id'])) {
     $productId = intval($_GET['id']);
@@ -10,7 +10,7 @@ if (isset($_GET['id'])) {
         $stmt->execute();
 
         // Redirect back to the manage products page after deletion
-        header("Location: manage_products.php?message=Product%20verwijderd");
+        header("Location: Admin/beheer_producten.php?message=Product%20verwijderd");
         exit();
     } catch (PDOException $e) {
         echo "Error deleting product: " . $e->getMessage();

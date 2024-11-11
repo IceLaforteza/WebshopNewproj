@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <title>Inloggen</title>
@@ -28,7 +27,7 @@
 
 <?php
 session_start();
-include 'includes/db.php';
+include 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];

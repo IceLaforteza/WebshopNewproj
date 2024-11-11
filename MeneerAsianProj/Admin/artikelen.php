@@ -1,5 +1,5 @@
 <?php
-include '../includes/db.php';
+include 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Handle form submission for adding/updating products
@@ -35,14 +35,14 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <header>
     <h1>Beheer Producten</h1>
     <nav>
-        <a href="../index.php">Home</a>
-        <a href="manage_products.php">Producten Beheren</a>
+        <a href="/index.php">Home</a>
+        <a href="Admin/beheer_producten.php">Producten Beheren</a>
     </nav>
 </header>
 
 <section class="product-management">
     <h2>Product Toevoegen / Bijwerken</h2>
-    <form action="manage_products.php" method="post">
+    <form action="Admin/beheer_producten.php" method="post">
         <input type="hidden" name="id" id="product-id">
         <label for="name">Naam:</label>
         <input type="text" id="name" name="name" required>
@@ -74,10 +74,10 @@ function editProduct(id, name, price) {
 
 function deleteProduct(id) {
     if (confirm('Weet je zeker dat je dit product wilt verwijderen?')) {
-        window.location.href = 'delete_product.php?id=' + id; // Create this file for deletion logic
+        window.location.href = 'Admin/delete_artikelen.php?id=' + id; // Create this file for deletion logic
     }
 }
 </script>
-<a href="delete_product.php?id=<?php echo $product['id']; ?>">Verwijder</a>
+<a href="Admin/delete_artikelen.php?id=<?php echo $product['id']; ?>">Verwijder</a>
 </body>
 </html>

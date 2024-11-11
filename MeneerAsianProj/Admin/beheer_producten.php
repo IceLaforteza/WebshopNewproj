@@ -1,5 +1,5 @@
 <?php
-include '../includes/db.php';
+include 'db.php';
 
 // Handle product deletion
 if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id'])) {
@@ -7,7 +7,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id']))
     $stmt = $conn->prepare("DELETE FROM products WHERE id = :id");
     $stmt->bindParam(':id', $productId);
     $stmt->execute();
-    header("Location: manage_products.php?message=Product%20verwijderd");
+    header("Location: Admin/beheer_producten.php?message=Product%20verwijderd");
     exit();
 }
 
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_product'])) {
     $stmt->bindParam(':name', $name);
     $stmt->bindParam(':price', $price);
     $stmt->execute();
-    header("Location: manage_products.php?message=Product%20toegevoegd");
+    header("Location: Admin/beheer_producten.php?message=Product%20toegevoegd");
     exit();
 }
 
@@ -66,7 +66,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?php echo htmlspecialchars($product['name']); ?></td>
                     <td>€<?php echo number_format($product['price'], 2); ?></td>
                     <td>
-                        <a href="manage_products.php?action=delete&id=<?php echo $product['id']; ?>">Verwijder</a>
+                        <a href="Admin/beheer_producten.php?action=delete&id=<?php echo $product['id']; ?>">Verwijder</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -74,7 +74,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </table>
 
     <h2>Voeg een nieuw product toe</h2>
-    <form method="POST" action="manage_products.php">
+    <form method="POST" action="Admin/beheer_producten.php">
         <label for="name">Productnaam:</label>
         <input type="text" name="name" required>
         <label for="price">Prijs:</label>
