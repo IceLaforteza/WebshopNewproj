@@ -1,10 +1,15 @@
 <?php
-include 'Include/db.php';
+include '../Include/db.php';
 
 // Enable error reporting for debugging
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
+// Check if the connection was successful
+if (!isset($conn)) {
+    die("Database connection variable is not set.");
+}
 
 // Handle product deletion
 if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id'])) {
